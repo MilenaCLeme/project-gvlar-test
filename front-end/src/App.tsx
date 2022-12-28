@@ -1,10 +1,9 @@
 import React from 'react';
+import Route from './router/index';
 
 function App() {
 	return (
-		<div>
-			test
-		</div>
+		<Route />
 	);
 }
 
