@@ -2,38 +2,44 @@ import React from 'react';
 import {FaFacebookSquare} from 'react-icons/fa';
 import {BsInstagram, BsLinkedin} from 'react-icons/bs';
 import {FaUserAlt} from 'react-icons/fa';
+import {MdOutlineKeyboardArrowDown} from 'react-icons/md';
+import style from './Header.module.scss';
+import logo from '../../img/Logo.png';
 
 function Header() {
 	return (
-		<header>
-			<div>
-				<div>
-					<nav>
-						<a>
+		<header className={style.header}>
+			<div className={style.information}>
+				<div className={style.information__size}>
+					<nav className={style.nav_media}>
+						<a href='#'>
 							<FaFacebookSquare />
 						</a>
-						<a>
+						<a href='#'>
 							<BsInstagram />
 						</a>
-						<a>
+						<a href='#'>
 							<BsLinkedin />
 						</a>
 					</nav>
-					<a>
+					<a href='#' className={style.page_user}>
 						<FaUserAlt />
-						<p>Entre ou cadastre-se</p>
+						<p className={style.page_user__text}>Entre ou cadastre-se</p>
 					</a>
 				</div>
 			</div>
-			<div>
-				<div>
-					<img />
+			<div className={style.logo_and_nav}>
+				<div className={style.logo_and_nav__size}>
+					<img className={style.logo} src={logo} alt='logo gvlar imoveis creci: 37.691-J' />
+					<nav className={style.nav_page}>
+						<a href='#'>Home</a>
+						<button className={style.button_page}>
+							Imoveis
+							<MdOutlineKeyboardArrowDown />
+						</button>
+						<a href='#'>Contato</a>
+					</nav>
 				</div>
-				<nav>
-					<a>Home</a>
-					<button>Imoveis</button>
-					<a>Contato</a>
-				</nav>
 			</div>
 		</header>
 	);
