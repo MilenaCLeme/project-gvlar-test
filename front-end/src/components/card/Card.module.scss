@@ -1,0 +1,70 @@
+@import '../../style/variaveis';
+@import '../../style/breakpoints';
+
+.card {
+  width: 180px;
+  height: 234px;
+  background-color: $gray-white;
+  margin-left: 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  border-radius: 5px;
+
+  &__info {
+    width: 100px;
+    height: 24px;
+    background-color: $gray-white;
+    opacity: 0.8;
+    display: flex;
+    align-items: center;
+    position: absolute;
+    justify-content: center;
+    border-radius: 5px;
+    margin-top: 12px;
+
+    p {
+      font-size: 12px;
+      font-weight: 600;
+      color: $gray-black-white;
+    }
+  }
+
+  &__img {
+    margin-top: 10px;
+    width: 160px;
+    height: 108px;
+  }
+
+  &__about {
+    margin-top: 8px;
+    width: 160px;
+
+    &__type {
+      color: $gray-black;
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    &__address {
+      color: $gray-black;
+      font-size: 14px;
+      margin-top: 16px;
+    }
+
+    &__region {
+      color: $gray-black;
+      font-size: 12px;
+      font-weight: 300;
+      margin-top: 2px;
+    }
+
+    &__value {
+      color: $orange;
+      font-size: 14px;
+      font-weight: 600;
+      margin-top: 24px;
+    }
+  }
+}
