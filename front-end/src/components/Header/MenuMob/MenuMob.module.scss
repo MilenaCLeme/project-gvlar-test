@@ -1,0 +1,139 @@
+@import '../../../style/variaveis';
+@import '../../../style/breakpoints';
+
+.button_menu {
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+  
+  svg {
+    color: $gray-black;
+  }
+}
+
+.openMenu {
+  animation-name: openMenu;
+  animation-duration: 0.3s;
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: $gray-white;
+
+  @keyframes openMenu {
+    from {
+      left: -100vw;
+    }
+    to {
+      left: 0;
+    }
+  }
+
+  @media (min-width: $mobile) {
+    display: none;
+  }
+
+}
+
+.closeMenu {
+  animation-name: closeMenu;
+  animation-duration: 0.3s;
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: $gray-white;
+
+  @keyframes closeMenu {
+    from {
+      left: 0;
+    }
+    to {
+      left: -100vw;
+    }
+  }
+
+  @media (min-width: $mobile) {
+    display: none;
+  }
+  
+}
+
+.modal {
+  width: 100%;
+  height: 100%;
+
+  @media (min-width: $mobile) {
+    display: none;
+  }
+}
+
+.header_menu {
+  width: 100%;
+  height: 80px;
+  background-color: $orange;
+  border-bottom: 2px solid black;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+
+  &__text {
+    font-size: 36px;
+    color: black;
+    font-weight: 500;
+  }
+
+  &__button {
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    padding: 0;
+    display: flex;
+    align-items: center;
+
+    svg {
+      color: black;
+    }
+  }
+}
+
+.nav_menu {
+  margin-top: 10px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  &__link {
+    padding-top: 8px;
+    padding-bottom: 8px;
+    padding-left: 8px;
+    width: 90vw;
+    text-decoration: none;
+    color: $gray-black;
+    font-size: 24px;
+    border: 1px solid $gray-black-white;
+    border-radius: 5px;
+    align-items: center;
+    margin-bottom: 12px;
+  }
+
+  &__select {
+    width: 90vw;
+    display: flex;
+    flex-direction: column;
+
+    &__text {
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      font-size: 24px;
+      font-weight: 300;
+      color: $gray-black-white;
+
+      svg {
+        color: $gray-black-white;
+      }
+    }
+  }
+}
