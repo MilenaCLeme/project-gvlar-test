@@ -130,3 +130,30 @@
   font-size: 12px;
   font-weight: 600;
 }
+
+.nav_info {
+  position: relative;
+
+  &__sub {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    background-color: $gray-white;
+    width: 124px;
+    height: auto;
+    border: 1px solid $gray-black-white;
+    border-radius: 2px;
+    
+    a {
+      text-decoration: none;
+      font-size: 16px;
+      color: $gray-black;
+      padding: 2px;
+
+      &:hover {
+        color: white;
+        background-color: $gray-black-white;
+      }
+    }
+  }
+}

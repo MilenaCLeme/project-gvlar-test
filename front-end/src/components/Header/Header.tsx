@@ -9,6 +9,12 @@ import logo from '../../img/Logo.png';
 import MenuMob from './MenuMob/MenuMob';
 
 function Header() {
+	const [selectIsOpen, setSelectIsOpen] = useState<boolean>(false);
+
+	const toggleSelect = () => {
+		setSelectIsOpen(!selectIsOpen);
+	};
+
 	return (
 		<>
 			<header className={style.header_desk}>
@@ -36,11 +42,19 @@ function Header() {
 						<img className={style.logo} src={logo} alt='logo gvlar imoveis creci: 37.691-J' />
 						<nav className={style.nav_page}>
 							<a href='#'>Home</a>
-							<div>
-								<button className={style.button_page}>
+							<div className={style.nav_info}>
+								<div onMouseEnter={toggleSelect} className={style.button_page}>
 									Imoveis
 									<MdOutlineKeyboardArrowDown />
-								</button>
+								</div>
+								{
+									selectIsOpen && (
+										<div onMouseLeave={toggleSelect} className={style.nav_info__sub}>
+											<a href='#'>Encontre um Imóvel</a>
+											<a href='#'>Cadastre seu Imóvel</a>
+										</div>
+									)
+								}
 							</div>
 							<a href='#'>Contato</a>
 						</nav>
