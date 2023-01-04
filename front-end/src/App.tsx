@@ -1,9 +1,9 @@
 import React from 'react';
-import Route from './router/index';
+import Router from './router/index';
 
 function App() {
 	return (
-		<Route />
+		<Router />
 	);
 }
 

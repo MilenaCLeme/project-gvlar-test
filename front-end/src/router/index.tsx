@@ -1,14 +1,17 @@
 import React from 'react';
 import Header from '../components/Header/Header';
 import Footer from '../components/Footer/Footer';
+import ClientPage from '../page/ClientPage/ClientPage';
+import {Routes, Route} from 'react-router-dom';
 
-function Route() {
+function Router() {
 	return (
-		<>
-			<Header />
-			<Footer />
-		</>
+		<main className='container'>
+			<Routes>
+				<Route path='/' element={<ClientPage />} />
+			</Routes>
+		</main>
 	);
 }
 
-export default Route;
+export default Router;
