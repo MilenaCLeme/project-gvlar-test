@@ -9,7 +9,9 @@ function ClientPage() {
 		<>
 			<Header />
 			<div className={style.container}>
-				<Outlet />
+				<main className={style.container_main}>
+					<Outlet />
+				</main>
 			</div>
 			<Footer />
 		</>

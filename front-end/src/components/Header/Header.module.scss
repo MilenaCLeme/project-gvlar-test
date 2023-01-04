@@ -136,6 +136,7 @@
 
   &__sub {
     position: absolute;
+    z-index: 1;
     display: flex;
     flex-direction: column;
     background-color: $gray-white;
