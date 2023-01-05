@@ -4,6 +4,10 @@
 .container_img {
   position: relative;
 
+  @media (max-width: $mobile) {
+    display: none;
+  }
+
   &__img {
     width: 100%;
     height: auto;
@@ -31,4 +35,125 @@
       color: $gray-white-black-two;
     }
   }
+}
+
+.container_form {
+  position: absolute;
+  bottom: 0;
+  display: flex;
+  height: 64px;
+  max-width: 764px;
+  width: 100%;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-evenly;
+  background-color: $gray-white;
+  border: 1px solid $orange;
+  border-radius: 20px;
+  opacity: 0.9;
+  margin-left: 12vw;
+  margin-bottom: 64px;
+
+  @media (max-width: $desk-min) {
+    margin-left: 8vw;
+    width: 692px
+  }
+
+  &__select {
+    border: 1px solid $gray-black;
+    border-radius: 10px;
+    background-color: white;
+    font-size: 12px;
+    color: black;
+    font-weight: 600;
+    height: 32px;
+    padding-right: 12px;
+    padding-left: 8px;
+    opacity: 1;
+  }
+
+  &__inputtext {
+    display: flex;
+    align-items: center;
+    height: auto;
+    width: auto;
+    background-color: white;
+    border: 1px solid $gray-black;
+    border-radius: 10px;
+    padding-left: 6px;
+    padding-right: 6px;
+
+    input {
+      border: none;
+      height: 30px;
+      border-radius: 10px;
+      &::placeholder {
+        color: black;
+        font-size: 12px;
+        font-weight: 600;
+      }
+    }
+  }
+
+  &__inputradio {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+input[type='radio'] {
+  display: none;
+}
+
+.radio-container label {
+  display: flex;
+  align-items: center;
+  column-gap: 4px;
+  margin-bottom: 4px;
+}
+
+.custom-radio {
+  border: 1px solid black;
+  width: 14px;
+  height: 14px;
+  display: grid;
+  place-content: center;
+  border-radius: 50%;
+}
+
+.custom-radio,
+span {
+  transition: 0.5s ease;
+  color: black;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.custom-radio span {
+  content: '';
+  width: 8px;
+  height: 8px;
+  background: transparent;
+  border-radius: 50%;
+}
+
+input[type='radio']:checked + .custom-radio {
+  border-color: black;
+}
+
+input[type='radio']:checked + .custom-radio span {
+  background: black;
+}
+
+.button_form {
+  font-size: 16px;
+  color: $orange;
+  font-weight: 600;
+  background-color: black;
+  opacity: 0.8;
+  border: 2px solid $orange;
+  border-radius: 10px;
+  width: 124px;
+  height: 40px;
 }
