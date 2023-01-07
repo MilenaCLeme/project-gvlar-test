@@ -52,9 +52,11 @@ function Home() {
 					</div>
 				</form>
 			</div>
-			<div>
-				<h1>Aproveite a oportunidade e anuncie seu imovel conosco </h1>
-				<button>Cadastre seu imóvel</button>
+			<div className={style.container_info}>
+				<div className={style.container_info__sub}>
+					<h1>Aproveite a oportunidade e anuncie seu imóvel conosco </h1>
+					<button className={style.container_info__sub__button}>Cadastre seu imóvel</button>
+				</div>
 			</div>
 		</>
 	);

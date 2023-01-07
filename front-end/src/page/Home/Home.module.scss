@@ -207,3 +207,54 @@ input[type='radio']:checked + .custom-radio span {
     width: 100%;
   }
 }
+
+.container_info {
+  display: flex;
+  margin-top: 24px;
+  height: auto;
+  margin-bottom: 24px;
+  margin-left: 32px;
+  margin-right: 32px;
+  flex-direction: column;
+  align-items: center;
+
+  &__sub {
+    border-top: 1px solid $gray-white-black-two;
+    border-bottom: 1px solid $gray-white-black-two;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    h1 {
+      font-size: 46px;
+      font-weight: 200;
+      color: $gray-black;
+      width: 682px;
+      text-align: center;
+      margin-top: 32px;
+      margin-bottom: 32px;
+
+      @media (max-width: $mobile) {
+        width: 100%;
+      }
+    }
+
+    &__button {
+      width: 340px;
+      height: 40px;
+      font-size: 16px;
+      font-weight: bold;
+      color: $orange;
+      background-color: $gray-white;
+      border: 1px solid $orange;
+      border-radius: 10px;
+      margin-bottom: 64px;
+
+
+      @media (max-width: $mobile) {
+        width: 60vw;
+      }
+    }
+  }
+}
