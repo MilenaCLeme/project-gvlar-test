@@ -258,3 +258,25 @@ input[type='radio']:checked + .custom-radio span {
     }
   }
 }
+
+.container_carousel {
+  margin-bottom: 32px;
+
+  &__title {
+    font-size: 20px;
+    color: $gray-black;
+    font-weight: 300;
+    margin-left: 42px;
+    margin-bottom: 12px;
+  }
+
+  &__carousel {
+    margin-right: 64px;
+    margin-left: 64px;
+  
+    @media (max-width: $mobile) {
+      margin-right: 24px;
+      margin-left: 24px;
+    }
+  }
+}
