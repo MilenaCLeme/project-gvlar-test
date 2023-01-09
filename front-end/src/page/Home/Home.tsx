@@ -65,24 +65,36 @@ function Home() {
 					<Carousel />
 				</div>
 			</div>
-			<div>
-				<div>
+			<div className={style.container_comments}>
+				<div className={style.container_comments__container}>
 					<h2>Você sempre pode contar conosco para ajudá-lo</h2>
 					<p>Veja alguns depoimentos sobre o nosso atendimento</p>
 				</div>
-				<div>
-					<div>
+				<div className={style.container_comments__comments}>
+					<div className={style.container_comments__comments__container}>
 						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc maximus, nulla ut commodo sagittis, sapien dui mattis dui, non pulvinar lorem felis nec erat</p>
 						<h4>Depoimento - Milena - compradora</h4>
 					</div>
-					<div>
+					<div className={style.container_comments__comments__container}>
 						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc maximus, nulla ut commodo sagittis, sapien dui mattis dui, non pulvinar lorem felis nec erat</p>
 						<h4>Depoimento - Milena - compradora</h4>
 					</div>
-					<div>
+					<div className={style.container_comments__comments__container}>
 						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc maximus, nulla ut commodo sagittis, sapien dui mattis dui, non pulvinar lorem felis nec erat</p>
 						<h4>Depoimento - Milena - compradora</h4>
 					</div>
+					<div className={style.container_comments__comments__containerMob}>
+						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc maximus, nulla ut commodo sagittis, sapien dui mattis dui, non pulvinar lorem felis nec erat</p>
+						<h4>Depoimento - Milena - compradora</h4>
+					</div>
+				</div>
+			</div>
+			<div className={style.container_carousel}>
+				<h2 className={style.container_carousel__title}>
+					Aproveite nossa oportunidades
+				</h2>
+				<div className={style.container_carousel__carousel}>
+					<Carousel />
 				</div>
 			</div>
 		</>
