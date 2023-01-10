@@ -3,7 +3,7 @@ import style from './Card.module.scss';
 
 function Card() {
 	return (
-		<div className={style.card}>
+		<a href='#' className={style.card}>
 			<div className={style.card__info}>
 				<p>Locação e Venda</p>
 			</div>
@@ -14,7 +14,7 @@ function Card() {
 				<p className={style.card__about__region}>São Paulo - SP</p>
 				<p className={style.card__about__value}>R$1.000.000,00</p>
 			</div>
-		</div>
+		</a>
 	);
 }
 

@@ -1,0 +1,14 @@
+.glider-next, .glider-prev {
+  top: 45%;
+  color: #ee7d05;
+  left: 0;
+}
+
+.glider-next:focus, .glider-next:hover, .glider-prev:focus, .glider-prev:hover {
+  color: #ee7d05;
+}
+
+.glider-next {
+  right: -12px;
+  left: auto;
+}
