@@ -4,7 +4,9 @@ import {MdEmail} from 'react-icons/md';
 import {BsWhatsapp} from 'react-icons/bs';
 import {HiMapPin} from 'react-icons/hi2';
 import PathPage from '../../components/pathpage/pathpage';
+import logo from '../../img/Logo.png';
 import style from './Contact.module.scss';
+import Carousel from '../../components/ carousel/Carousel';
 
 function Contact() {
 	return (
@@ -25,30 +27,36 @@ function Contact() {
 				</button>
 				<p className={style.form_contact__info}>*Resposta em até 2 dias úteis</p>
 			</form>
-			<div>
-				<div>
-					<img />
+			<div className={style.container_about}>
+				<div className={style.container_about__container}>
+					<img src={logo} />
 					<p>A GVLAR IMÓVEIS presta serviços no ramo imobiliário, intermediando negociações de compra, venda e locação. Conta também com um setor de administração de imóveis e com departamento jurídico que acompanha todas as negociações efetuadas em nossa imobiliária para realizar tudo com a máxima segurança aos nossos clientes.</p>
 				</div>
-				<div>
-					<div>
+				<div className={style.container_about__containertwo}>
+					<div className={style.container_about__address}>
 						<h2>Localização</h2>
 						<a href='#'>
-							<HiMapPin />
+							<HiMapPin size='32px'/>
 							<p> R. Cuiabá, 797 - Alto da Mooca, São Paulo - SP, 03183-001</p>
 						</a>
 					</div>
-					<div>
+					<div className={style.container_about__contact}>
 						<h2>Contatos</h2>
-						<div>
-							<BsWhatsapp />
+						<div className={style.container_about__container_contact}>
+							<BsWhatsapp size='32px' />
 							<p>(11) 94002-0947</p>
 						</div>
-						<div>
-							<MdEmail />
+						<div className={style.container_about__container_contact}>
+							<MdEmail size='32px' />
 							<p>gvlar@gmail.com</p>
 						</div>
 					</div>
+				</div>
+			</div>
+			<div className={style.container_carousel}>
+				<h2 className={style.container_carousel__title}>Explore nossas oportunidades</h2>
+				<div className={style.container_carousel__carousel}>
+					<Carousel />
 				</div>
 			</div>
 		</>
