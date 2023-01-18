@@ -1,14 +1,23 @@
 import React from 'react';
 import style from './pathpage.module.scss';
 
-function PathPage() {
+type Props = {
+	word: string;
+	phrase: undefined | string;
+};
+
+function PathPage({word, phrase}: Props) {
 	return (
 		<>
 			<section className={style.container_page}>
 				<a href='#'>Home</a>
-				<p>{'> Contato'}</p>
+				<p>{`> ${word}`}</p>
 			</section>
-			<h1 className={style.title_page}>Fale Conosco</h1>
+			{
+				phrase !== '' && (
+					<h1 className={style.title_page}>{phrase}</h1>
+				)
+			}
 		</>
 	);
 }

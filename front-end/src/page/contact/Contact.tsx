@@ -11,7 +11,7 @@ import Carousel from '../../components/ carousel/Carousel';
 function Contact() {
 	return (
 		<>
-			<PathPage />
+			<PathPage word='Contato' phrase='Fale Conosco'/>
 			<form className={style.form_contact}>
 				<input className={style.form_contact__input_text} type='text' placeholder='Nome'/>
 				<input className={style.form_contact__input_text} type='text' placeholder='Telefone'/>
