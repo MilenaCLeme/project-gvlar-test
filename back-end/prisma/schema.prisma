@@ -31,16 +31,16 @@ model Immobile {
   vsell       String?
   vboth       String?
   iptu        String
-  describe    String @db.VarChar(800)
+  describe    String
   footage     Int
   bathroom    Int
   vacancy     Int
   address     String
   number      String
   complement  String?
-  cep         String
+  postalcode  String
   district    String
-  UF          String
+  state       String
   record      User? @relation(fields: [recordId], references: [id])
   recordId    Int?
   photographs Photograph[]
@@ -51,7 +51,7 @@ model Immobile {
 
 model Photograph {
   id          Int @id @default(autoincrement())
-  name        String @db.VarChar(250)
+  describe    String @db.VarChar(250)
   url         String
   immobile    Immobile? @relation(fields: [immobileId], references: [id])
   immobileId  Int?
