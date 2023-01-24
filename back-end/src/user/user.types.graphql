@@ -26,15 +26,19 @@ input UpdateUser {
   role: String
 }
 
+type WhereUser {
+  id: ID,
+  email: String
+}
+
 type Query {
   users: [User!]!
-  userId(id: ID!) : User
-  userEmail(email: String!) : User
-  login(email: String!, senha: String!) : User
+  user(where: WhereUser) : User
 }
 
 type Mutation {
   createUser(input: NewUser): User
   updateUser(input: UpdateUser): User
-  deleteUser(id: ID): User
+  deleteUser(where: WhereUser): User
+  login(email: String!, senha: String!) : String
 }
