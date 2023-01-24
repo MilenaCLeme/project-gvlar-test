@@ -1,12 +1,12 @@
-import { Field } from '@nestjs/graphql';
+import { Field, Int } from '@nestjs/graphql';
 import { InputType } from '@nestjs/graphql';
 import * as Validator from 'class-validator';
 import { ImmobileUpdateManyWithoutRecordNestedInput } from '../immobile/immobile-update-many-without-record-nested.input';
 
 @InputType()
 export class UserUpdateInput {
-  @Field()
-  id?: string;
+  @Field(() => Int, { nullable: true })
+  id?: number;
 
   @Field(() => String, { nullable: false })
   @Validator.IsEmail()

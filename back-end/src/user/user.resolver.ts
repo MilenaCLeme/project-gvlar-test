@@ -14,8 +14,8 @@ export class UserResolvers {
   }
 
   @Query('user')
-  async userId(@Args('id') args: UserWhereUniqueInput) {
-    return this.userService.user(args);
+  async user(@Args('input') input: UserWhereUniqueInput) {
+    return this.userService.user(input);
   }
 
   @Mutation('createUser')
@@ -29,7 +29,7 @@ export class UserResolvers {
 
     const hash = await bcrypt.hash(password, 10);
 
-    const where = id ? { id: parseInt(id) } : { email };
+    const where = id ? { id } : { email };
     return this.userService.updateUser(where, {
       email,
       name,
