@@ -5,21 +5,22 @@ import { BoolFieldUpdateOperationsInput } from '../prisma/bool-field-update-oper
 
 @InputType()
 export class UserUpdateWithoutImmobilesInput {
-  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
-  email?: StringFieldUpdateOperationsInput;
 
-  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
-  name?: StringFieldUpdateOperationsInput;
+    @Field(() => StringFieldUpdateOperationsInput, {nullable:true})
+    email?: StringFieldUpdateOperationsInput;
 
-  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
-  password?: StringFieldUpdateOperationsInput;
+    @Field(() => StringFieldUpdateOperationsInput, {nullable:true})
+    name?: StringFieldUpdateOperationsInput;
 
-  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
-  phone?: StringFieldUpdateOperationsInput;
+    @Field(() => StringFieldUpdateOperationsInput, {nullable:true})
+    password?: StringFieldUpdateOperationsInput;
 
-  @Field(() => BoolFieldUpdateOperationsInput, { nullable: true })
-  validation?: BoolFieldUpdateOperationsInput;
+    @Field(() => StringFieldUpdateOperationsInput, {nullable:true})
+    phone?: StringFieldUpdateOperationsInput;
 
-  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
-  role?: StringFieldUpdateOperationsInput;
+    @Field(() => BoolFieldUpdateOperationsInput, {nullable:true})
+    validation?: BoolFieldUpdateOperationsInput;
+
+    @Field(() => StringFieldUpdateOperationsInput, {nullable:true})
+    role?: StringFieldUpdateOperationsInput;
 }

@@ -6,11 +6,12 @@ import { UserCreateWithoutImmobilesInput } from './user-create-without-immobiles
 
 @InputType()
 export class UserUpsertWithoutImmobilesInput {
-  @Field(() => UserUpdateWithoutImmobilesInput, { nullable: false })
-  @Type(() => UserUpdateWithoutImmobilesInput)
-  update!: UserUpdateWithoutImmobilesInput;
 
-  @Field(() => UserCreateWithoutImmobilesInput, { nullable: false })
-  @Type(() => UserCreateWithoutImmobilesInput)
-  create!: UserCreateWithoutImmobilesInput;
+    @Field(() => UserUpdateWithoutImmobilesInput, {nullable:false})
+    @Type(() => UserUpdateWithoutImmobilesInput)
+    update!: UserUpdateWithoutImmobilesInput;
+
+    @Field(() => UserCreateWithoutImmobilesInput, {nullable:false})
+    @Type(() => UserCreateWithoutImmobilesInput)
+    create!: UserCreateWithoutImmobilesInput;
 }

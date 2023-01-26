@@ -8,6 +8,11 @@ type User {
   role: String!
 }
 
+type AuthPayload {
+  token: String
+  user: User
+}
+
 input NewUser {
   name: String!
   email: String!
@@ -40,5 +45,5 @@ type Mutation {
   createUser(input: NewUser): User
   updateUser(input: UpdateUser): User
   deleteUser(input: WhereUser): User
-  login(email: String!, senha: String!) : String
+  login(email: String!, senha: String!) : AuthPayload
 }

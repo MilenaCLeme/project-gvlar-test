@@ -9,29 +9,30 @@ import { UserUpdateWithoutImmobilesInput } from './user-update-without-immobiles
 
 @InputType()
 export class UserUpdateOneWithoutImmobilesNestedInput {
-  @Field(() => UserCreateWithoutImmobilesInput, { nullable: true })
-  @Type(() => UserCreateWithoutImmobilesInput)
-  create?: UserCreateWithoutImmobilesInput;
 
-  @Field(() => UserCreateOrConnectWithoutImmobilesInput, { nullable: true })
-  @Type(() => UserCreateOrConnectWithoutImmobilesInput)
-  connectOrCreate?: UserCreateOrConnectWithoutImmobilesInput;
+    @Field(() => UserCreateWithoutImmobilesInput, {nullable:true})
+    @Type(() => UserCreateWithoutImmobilesInput)
+    create?: UserCreateWithoutImmobilesInput;
 
-  @Field(() => UserUpsertWithoutImmobilesInput, { nullable: true })
-  @Type(() => UserUpsertWithoutImmobilesInput)
-  upsert?: UserUpsertWithoutImmobilesInput;
+    @Field(() => UserCreateOrConnectWithoutImmobilesInput, {nullable:true})
+    @Type(() => UserCreateOrConnectWithoutImmobilesInput)
+    connectOrCreate?: UserCreateOrConnectWithoutImmobilesInput;
 
-  @Field(() => Boolean, { nullable: true })
-  disconnect?: boolean;
+    @Field(() => UserUpsertWithoutImmobilesInput, {nullable:true})
+    @Type(() => UserUpsertWithoutImmobilesInput)
+    upsert?: UserUpsertWithoutImmobilesInput;
 
-  @Field(() => Boolean, { nullable: true })
-  delete?: boolean;
+    @Field(() => Boolean, {nullable:true})
+    disconnect?: boolean;
 
-  @Field(() => UserWhereUniqueInput, { nullable: true })
-  @Type(() => UserWhereUniqueInput)
-  connect?: UserWhereUniqueInput;
+    @Field(() => Boolean, {nullable:true})
+    delete?: boolean;
 
-  @Field(() => UserUpdateWithoutImmobilesInput, { nullable: true })
-  @Type(() => UserUpdateWithoutImmobilesInput)
-  update?: UserUpdateWithoutImmobilesInput;
+    @Field(() => UserWhereUniqueInput, {nullable:true})
+    @Type(() => UserWhereUniqueInput)
+    connect?: UserWhereUniqueInput;
+
+    @Field(() => UserUpdateWithoutImmobilesInput, {nullable:true})
+    @Type(() => UserUpdateWithoutImmobilesInput)
+    update?: UserUpdateWithoutImmobilesInput;
 }

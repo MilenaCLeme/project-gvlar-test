@@ -1,34 +1,30 @@
-import { Field, Int } from '@nestjs/graphql';
+import { Field } from '@nestjs/graphql';
 import { InputType } from '@nestjs/graphql';
-import * as Validator from 'class-validator';
+import { StringFieldUpdateOperationsInput } from '../prisma/string-field-update-operations.input';
+import { BoolFieldUpdateOperationsInput } from '../prisma/bool-field-update-operations.input';
 import { ImmobileUpdateManyWithoutRecordNestedInput } from '../immobile/immobile-update-many-without-record-nested.input';
 
 @InputType()
 export class UserUpdateInput {
-  @Field(() => Int, { nullable: true })
-  id?: number;
 
-  @Field(() => String, { nullable: false })
-  @Validator.IsEmail()
-  email?: string;
+    @Field(() => StringFieldUpdateOperationsInput, {nullable:true})
+    email?: StringFieldUpdateOperationsInput;
 
-  @Field(() => String, { nullable: false })
-  name?: string;
+    @Field(() => StringFieldUpdateOperationsInput, {nullable:true})
+    name?: StringFieldUpdateOperationsInput;
 
-  @Field(() => String, { nullable: false })
-  @Validator.Length(6, 10)
-  password?: string;
+    @Field(() => StringFieldUpdateOperationsInput, {nullable:true})
+    password?: StringFieldUpdateOperationsInput;
 
-  @Field(() => String, { nullable: false })
-  @Validator.Length(10, 11)
-  phone?: string;
+    @Field(() => StringFieldUpdateOperationsInput, {nullable:true})
+    phone?: StringFieldUpdateOperationsInput;
 
-  @Field(() => Boolean, { nullable: true })
-  validation?: boolean;
+    @Field(() => BoolFieldUpdateOperationsInput, {nullable:true})
+    validation?: BoolFieldUpdateOperationsInput;
 
-  @Field(() => String, { nullable: false })
-  role?: string;
+    @Field(() => StringFieldUpdateOperationsInput, {nullable:true})
+    role?: StringFieldUpdateOperationsInput;
 
-  @Field(() => ImmobileUpdateManyWithoutRecordNestedInput, { nullable: true })
-  immobiles?: ImmobileUpdateManyWithoutRecordNestedInput;
+    @Field(() => ImmobileUpdateManyWithoutRecordNestedInput, {nullable:true})
+    immobiles?: ImmobileUpdateManyWithoutRecordNestedInput;
 }

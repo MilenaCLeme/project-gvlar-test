@@ -1,21 +1,20 @@
 import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
-import { UserCreateInput } from 'src/@generated/prisma-nestjs-graphql/user/user-create.input';
 import { UserService } from './user.service';
+import { UpdateUser, WhereUser } from 'src/graphql';
 import * as bcrypt from 'bcrypt';
-import { UserWhereUniqueInput } from 'src/@generated/prisma-nestjs-graphql/user/user-where-unique.input';
-import { UserUpdateInput } from 'src/@generated/prisma-nestjs-graphql/user/user-update.input';
+import { UserCreateInput } from 'src/@generated/prisma-nestjs-graphql/user/user-create.input';
 
 @Resolver('User')
 export class UserResolvers {
   constructor(private readonly userService: UserService) {}
   @Query('users')
   async users() {
-    return this.userService.users();
+    return this.userService.findAll();
   }
 
   @Query('user')
-  async user(@Args('input') input: UserWhereUniqueInput) {
-    return this.userService.user(input);
+  async user(@Args('input') input: WhereUser) {
+    return this.userService.findOne(input);
   }
 
   @Mutation('createUser')
@@ -24,13 +23,20 @@ export class UserResolvers {
   }
 
   @Mutation('updateUser')
-  async update(@Args('input') args: UserUpdateInput) {
+  async update(@Args('input') args: UpdateUser) {
     const { id, email, name, password, phone, role, validation } = args;
 
-    const hash = await bcrypt.hash(password, 10);
+    if (password && (password.length < 6 || password.length > 10)) {
+      throw new Error('password invalid');
+    }
 
-    const where = id ? { id } : { email };
-    return this.userService.updateUser(where, {
+    if (phone && (phone.length < 10 || phone.length > 11)) {
+      throw new Error('phone invalid');
+    }
+
+    const hash = password ? await bcrypt.hash(password, 10) : password;
+
+    return this.userService.updateUser(id, {
       email,
       name,
       phone,
@@ -41,7 +47,12 @@ export class UserResolvers {
   }
 
   @Mutation('deleteUser')
-  async delete(@Args('input') input: UserWhereUniqueInput) {
+  async delete(@Args('input') input: WhereUser) {
     return this.userService.deleteUser(input);
+  }
+
+  @Mutation('login')
+  async login(@Args() email: string, password: string) {
+    console.log(email, password);
   }
 }
