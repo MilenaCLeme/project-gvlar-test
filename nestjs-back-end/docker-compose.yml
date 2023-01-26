@@ -23,6 +23,5 @@ services:
     volumes:
       - .docker/dbdata:/var/lib/postgresql/data
     environment:
-      - POSTGRES_USER=root
-      - POSTGRES_PASSWORD=123
-      - POSTGRES_DB=nesjs_graphql_prisma
+      - POSTGRES_PASSWORD=docker
+      - POSTGRES_DB=prismaapi
