@@ -9,3 +9,74 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+model User {
+  id                  Int @id @default(autoincrement())
+  email               String @unique
+  name                String @db.VarChar(180)
+  hashedPassword      String
+  hashedRefreshToken  String?
+  phone               String
+  validation          Boolean @default(false)
+  role                String
+  immobiles           Immobile[]
+
+  @@map("user")
+}
+
+model Immobile {
+  id          Int @id @default(autoincrement())
+  published   Boolean @default(false)
+  type        String
+  about       String
+  vsell       String?
+  vboth       String?
+  iptu        String
+  describe    String
+  footage     Int
+  bathroom    Int
+  vacancy     Int
+  address     String
+  number      String
+  complement  String?
+  postalcode  String
+  district    String
+  state       String
+  record      User? @relation(fields: [recordId], references: [id])
+  recordId    Int?
+  photographs Photograph[]
+  owners      ImmobileOnOwner[]
+
+  @@map("immobile")
+}
+
+model Photograph {
+  id          Int @id @default(autoincrement())
+  describe    String @db.VarChar(250)
+  url         String
+  immobile    Immobile? @relation(fields: [immobileId], references: [id])
+  immobileId  Int?
+
+  @@map("photograph")
+}
+
+model Owner {
+  id          Int @id @default(autoincrement())
+  name        String
+  email       String @unique
+  phone       String
+  immobiles   ImmobileOnOwner[]
+
+  @@map("owner")
+}
+
+model ImmobileOnOwner {
+  immobile    Immobile @relation(fields: [immobileId], references: [id])
+  immobileId  Int
+  owner       Owner @relation(fields: [ownerId], references: [id])
+  ownerId     Int
+
+  @@id([immobileId, ownerId])
+
+  @@map("immobileonowner")
+}
