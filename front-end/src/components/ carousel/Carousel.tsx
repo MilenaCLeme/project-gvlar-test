@@ -20,7 +20,7 @@ function Carousel() {
 			{
 				arr.map(number => (
 					<div key={number}>
-						<Card />
+						<Card cama={23} />
 					</div>
 				))
 			}

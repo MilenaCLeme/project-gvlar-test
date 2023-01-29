@@ -1,7 +1,13 @@
 import React from 'react';
 import style from './Card.module.scss';
 
-function Card() {
+type Props = {
+	cama: number | undefined;
+};
+
+function Card(props: Props) {
+	console.log(props);
+
 	return (
 		<a href='#' className={style.card}>
 			<div className={style.card__info}>
