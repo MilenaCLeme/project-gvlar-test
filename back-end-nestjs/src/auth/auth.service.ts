@@ -3,7 +3,6 @@ import { ConfigService } from '@nestjs/config';
 import { JwtService } from '@nestjs/jwt';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { SignUpInput } from './dto/signup-input';
-import { UpdateAuthInput } from './dto/update-auth.input';
 import * as argon from 'argon2';
 import { SignInInput } from './dto/signin-input';
 
@@ -62,18 +61,6 @@ export class AuthService {
     return { accessToken, refreshToken, user };
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} auth`;
-  }
-
-  update(id: number, updateAuthInput: UpdateAuthInput) {
-    return `This action updates a #${id} auth`;
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} auth`;
-  }
-
   async createTokens(userId: number, email: string) {
     const accessToken = this.jwtService.sign(
       { userId, email },
@@ -115,18 +102,12 @@ export class AuthService {
     return { loggedOut: true };
   }
 
-  async getNewTokens(userId: number, rt: string) {
+  async getNewTokens(userId: number) {
     const user = await this.prisma.user.findUnique({
       where: { id: userId },
     });
 
     if (!user) {
-      throw new ForbiddenException('Access Denied');
-    }
-
-    const doPasswordsMatch = await argon.verify(user.hashedPassword, rt);
-
-    if (!doPasswordsMatch) {
       throw new ForbiddenException('Access Denied');
     }
 
