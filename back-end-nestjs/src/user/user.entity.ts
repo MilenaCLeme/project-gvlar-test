@@ -19,4 +19,7 @@ export class User {
 
   @Field()
   role: string;
+
+  @Field()
+  hashedPassword: string;
 }

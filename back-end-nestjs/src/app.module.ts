@@ -5,9 +5,13 @@ import { join } from 'path';
 import { PrismaService } from './prisma/prisma.service';
 import { AuthModule } from './auth/auth.module';
 import { UserModule } from './user/user.module';
+import { ConfigModule } from '@nestjs/config';
+import { APP_GUARD } from '@nestjs/core';
+import { AccesTokenGuard } from './auth/guards/acessToken.guard';
 
 @Module({
   imports: [
+    ConfigModule.forRoot({ isGlobal: true }),
     GraphQLModule.forRoot<ApolloDriverConfig>({
       driver: ApolloDriver,
       autoSchemaFile: join(process.cwd(), 'src/schema.gql'),
@@ -17,6 +21,6 @@ import { UserModule } from './user/user.module';
     UserModule,
   ],
   controllers: [],
-  providers: [PrismaService],
+  providers: [PrismaService, { provide: APP_GUARD, useClass: AccesTokenGuard }],
 })
 export class AppModule {}
