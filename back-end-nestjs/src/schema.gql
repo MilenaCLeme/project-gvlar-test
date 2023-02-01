@@ -2,9 +2,13 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
-type Auth {
-  """Example field (placeholder)"""
-  exampleField: Int!
+input CreateUserInput {
+  email: String!
+  hashedPassword: String!
+  name: String!
+  phone: String!
+  role: String!
+  validation: Boolean!
 }
 
 type LogoutResponse {
@@ -12,11 +16,13 @@ type LogoutResponse {
 }
 
 type Mutation {
+  createUser(createUserInput: CreateUserInput!): User!
   getNewTokens: NewTokensResponse!
   logout(id: Int!): LogoutResponse!
+  removeUser(id: Int!): User!
   signin(signInInput: SignInInput!): SignResponse!
   signup(signUpInput: SignUpInput!): SignResponse!
-  updateAuth(updateAuthInput: UpdateAuthInput!): Auth!
+  updateUser(updateUserInput: UpdateUserInput!): User!
 }
 
 type NewTokensResponse {
@@ -25,8 +31,8 @@ type NewTokensResponse {
 }
 
 type Query {
-  auth(id: Int!): Auth!
-  hello: String!
+  user(id: Int!): User!
+  userId: String!
 }
 
 input SignInInput {
@@ -48,13 +54,14 @@ input SignUpInput {
   role: String!
 }
 
-input UpdateAuthInput {
+input UpdateUserInput {
   email: String
+  hashedPassword: String
   id: Int!
   name: String
-  password: String
   phone: String
   role: String
+  validation: Boolean
 }
 
 type User {

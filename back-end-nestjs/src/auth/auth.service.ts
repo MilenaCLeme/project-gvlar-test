@@ -5,6 +5,7 @@ import { PrismaService } from 'src/prisma/prisma.service';
 import { SignUpInput } from './dto/signup-input';
 import * as argon from 'argon2';
 import { SignInInput } from './dto/signin-input';
+import { MailerService } from '@nestjs-modules/mailer';
 
 @Injectable()
 export class AuthService {
@@ -12,6 +13,7 @@ export class AuthService {
     private prisma: PrismaService,
     private jwtService: JwtService,
     private configService: ConfigService,
+    private mailerService: MailerService,
   ) {}
 
   async signup(signUpInput: SignUpInput) {
@@ -25,10 +27,14 @@ export class AuthService {
         role: signUpInput.role,
       },
     });
+
+    // await this.sendEmail(user.email, user.id);
+
     const { accessToken, refreshToken } = await this.createTokens(
       user.id,
       user.email,
     );
+
     await this.updateRefreshToken(user.id, refreshToken);
     return { accessToken, refreshToken, user };
   }
@@ -55,6 +61,8 @@ export class AuthService {
       user.id,
       user.email,
     );
+
+    await this.sendEmail(user.email, user.id);
 
     await this.updateRefreshToken(user.id, refreshToken);
 
@@ -119,5 +127,14 @@ export class AuthService {
     await this.updateRefreshToken(user.id, refreshToken);
 
     return { accessToken, refreshToken, user };
+  }
+
+  async sendEmail(email: string, userId: number) {
+    await this.mailerService.sendMail({
+      to: email,
+      from: 'milenaleme4@hotmail.com',
+      subject: 'Bem-vindo a gvlar - libera o acesso',
+      html: `<div><h1>Bem-vindo</h1><p>test ${userId}</p></div>`,
+    });
   }
 }
