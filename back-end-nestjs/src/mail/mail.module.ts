@@ -18,9 +18,7 @@ import { ConfigService } from '@nestjs/config';
             pass: config.get('MAIL_PASSWORD'),
           },
         },
-        defaults: {
-          from: `"No Reply" <${config.get('MAIL_FROM')}>`,
-        },
+        ignoreTLS: true,
         template: {
           dir: join(__dirname, 'templates'),
           adapter: new HandlebarsAdapter(),
