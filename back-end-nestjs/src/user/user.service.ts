@@ -2,6 +2,7 @@ import { ForbiddenException, Injectable } from '@nestjs/common';
 import * as argon from 'argon2';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { UpdateUserInput } from './dto/update-user.input';
+import { UpdateValidationVerify } from './dto/update-validation-verify.input';
 import { UpdateValidation } from './dto/update-validation.input';
 
 @Injectable()
@@ -19,7 +20,7 @@ export class UserService {
     });
   }
 
-  async updateValidationPage(updateValidationPage: UpdateValidation) {
+  async updateValidationPage(updateValidationPage: UpdateValidationVerify) {
     const user = await this.prisma.user.findUnique({
       where: {
         id: updateValidationPage.id,
@@ -42,6 +43,46 @@ export class UserService {
     if (!doRefreshTokeMatch) {
       throw new ForbiddenException('Access Denied');
     }
+
+    return { validation: true };
+  }
+
+  async updateValidation(updateValidation: UpdateValidation) {
+    if (!updateValidation.validation) {
+      throw new ForbiddenException('Access Denied');
+    }
+
+    const user = await this.prisma.user.findUnique({
+      where: {
+        id: updateValidation.id,
+      },
+    });
+
+    if (!user) {
+      throw new ForbiddenException('Access Denied');
+    }
+
+    if (user.validation) {
+      throw new ForbiddenException('Access Denied');
+    }
+
+    const doRefreshTokeMatch = await argon.verify(
+      user.hashedRefreshToken,
+      updateValidation.refreshToken,
+    );
+
+    if (!doRefreshTokeMatch) {
+      throw new ForbiddenException('Access Denied');
+    }
+
+    await this.prisma.user.update({
+      where: {
+        id: user.id,
+      },
+      data: {
+        validation: true,
+      },
+    });
 
     return { validation: true };
   }
