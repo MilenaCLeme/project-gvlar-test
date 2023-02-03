@@ -2,27 +2,18 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
-input CreateUserInput {
-  email: String!
-  hashedPassword: String!
-  name: String!
-  phone: String!
-  role: String!
-  validation: Boolean!
-}
-
 type LogoutResponse {
   loggedOut: Boolean!
 }
 
 type Mutation {
-  createUser(createUserInput: CreateUserInput!): User!
   getNewTokens: NewTokensResponse!
   logout(id: Int!): LogoutResponse!
   removeUser(id: Int!): User!
   signin(signInInput: SignInInput!): SignResponse!
   signup(signUpInput: SignUpInput!): SignResponse!
   updateUser(updateUserInput: UpdateUserInput!): User!
+  updateValidation: ValidationUser!
 }
 
 type NewTokensResponse {
@@ -31,8 +22,9 @@ type NewTokensResponse {
 }
 
 type Query {
-  user(id: Int!): User!
+  user: [User!]!
   userId: String!
+  userOne(email: String!): User!
 }
 
 input SignInInput {
@@ -71,5 +63,9 @@ type User {
   name: String!
   phone: String!
   role: String!
+  validation: Boolean!
+}
+
+type ValidationUser {
   validation: Boolean!
 }

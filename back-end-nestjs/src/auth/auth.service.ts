@@ -28,7 +28,7 @@ export class AuthService {
       },
     });
 
-    // await this.sendEmail(user.email, user.id);
+    await this.mailService.sendUserConfirmation(user.name, user.id, user.email);
 
     const { accessToken, refreshToken } = await this.createTokens(
       user.id,
@@ -48,6 +48,10 @@ export class AuthService {
       throw new ForbiddenException('Access Denied');
     }
 
+    if (!user.validation) {
+      throw new ForbiddenException('Access not Auth');
+    }
+
     const doPasswordsMatch = await argon.verify(
       user.hashedPassword,
       signInInput.password,
@@ -61,8 +65,6 @@ export class AuthService {
       user.id,
       user.email,
     );
-
-    await this.mailService.sendUserConfirmation(user.name, user.id, user.email);
 
     await this.updateRefreshToken(user.id, refreshToken);
 
@@ -110,12 +112,17 @@ export class AuthService {
     return { loggedOut: true };
   }
 
-  async getNewTokens(userId: number) {
+  async getNewTokens(userId: number, header: string) {
+    console.log(header);
     const user = await this.prisma.user.findUnique({
       where: { id: userId },
     });
 
     if (!user) {
+      throw new ForbiddenException('Access Denied');
+    }
+
+    if (!user.hashedRefreshToken) {
       throw new ForbiddenException('Access Denied');
     }
 

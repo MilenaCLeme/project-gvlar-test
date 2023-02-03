@@ -10,10 +10,9 @@ export class MailService {
     userId: number,
     userEmail: string,
   ) {
-    console.log(userName, userEmail, userId);
     await this.mailerService.sendMail({
-      from: 'milena@milenachrysostomoleme.com.br',
       to: userEmail, // override default from
+      from: 'biluzinha4@hotmail.com',
       subject: 'Welcome to Nice App! Confirm your Email',
       template: './confirmation', // `.hbs` extension is appended automatically
       context: {

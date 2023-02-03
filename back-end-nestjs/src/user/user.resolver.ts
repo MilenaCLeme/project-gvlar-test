@@ -1,26 +1,31 @@
 import { Resolver, Query, Mutation, Args, Int } from '@nestjs/graphql';
 import { UserService } from './user.service';
 import { User } from './entities/user.entity';
-import { CreateUserInput } from './dto/create-user.input';
 import { UpdateUserInput } from './dto/update-user.input';
+import { Public } from 'src/auth/decorators/public.decoratior';
+import { ValidationUser } from './dto/validation-User.input';
+import { UpdateValidation } from './dto/update-validation.input';
 
 @Resolver(() => User)
 export class UserResolver {
   constructor(private readonly userService: UserService) {}
 
-  @Mutation(() => User)
-  createUser(@Args('createUserInput') createUserInput: CreateUserInput) {
-    return this.userService.create(createUserInput);
-  }
-
   @Query(() => [User], { name: 'user' })
-  findAll() {
-    return this.userService.findAll();
+  userAll() {
+    return this.userService.userAll();
   }
 
-  @Query(() => User, { name: 'user' })
-  findOne(@Args('id', { type: () => Int }) id: number) {
-    return this.userService.findOne(id);
+  @Query(() => User)
+  userOne(@Args('email') email: string) {
+    return this.userService.userOne(email);
+  }
+
+  @Public()
+  @Mutation(() => ValidationUser)
+  updateValidationPage(
+    @Args('validationUserPage') validateUserPage: UpdateValidation,
+  ) {
+    return this.userService.updateValidationPage(validateUserPage);
   }
 
   @Mutation(() => User)

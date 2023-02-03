@@ -1,4 +1,4 @@
-import { Resolver, Mutation, Args, Query, Int } from '@nestjs/graphql';
+import { Resolver, Mutation, Args, Query, Int, Context } from '@nestjs/graphql';
 import { AuthService } from './auth.service';
 import { Auth } from './entities/auth.entity';
 import { SignUpInput } from './dto/signup-input';
@@ -36,7 +36,7 @@ export class AuthResolver {
   }
 
   @Mutation(() => NewTokensResponse)
-  getNewTokens(@CurrentUserId() userId: number) {
-    return this.authService.getNewTokens(userId);
+  getNewTokens(@CurrentUserId() userId: number, @Context() header: string) {
+    return this.authService.getNewTokens(userId, header);
   }
 }
