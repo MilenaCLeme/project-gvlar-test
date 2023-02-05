@@ -1,5 +1,5 @@
 import { Field, Int, ObjectType } from '@nestjs/graphql';
-import { IsBoolean, IsNotEmpty, IsString } from 'class-validator';
+import { IsNotEmpty, IsString } from 'class-validator';
 
 @ObjectType()
 export class UpdateValidation {
@@ -11,8 +11,4 @@ export class UpdateValidation {
   @IsString()
   @Field()
   refreshToken: string;
-
-  @IsBoolean()
-  @Field()
-  validation: boolean;
 }

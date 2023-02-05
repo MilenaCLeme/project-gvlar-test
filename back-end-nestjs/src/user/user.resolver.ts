@@ -3,8 +3,7 @@ import { UserService } from './user.service';
 import { User } from './entities/user.entity';
 import { UpdateUserInput } from './dto/update-user.input';
 import { Public } from 'src/auth/decorators/public.decoratior';
-import { ValidationUser } from './dto/validation-User.input';
-import { UpdateValidationVerify } from './dto/update-validation-verify.input';
+import { ResponseValidation } from './dto/response-validation.input';
 import { UpdateValidation } from './dto/update-validation.input';
 
 @Resolver(() => User)
@@ -17,22 +16,14 @@ export class UserResolver {
   }
 
   @Query(() => User)
-  userOne(@Args('email') email: string) {
-    return this.userService.userOne(email);
+  userOneEmail(@Args('email') email: string) {
+    return this.userService.userOneEmail(email);
   }
 
   @Public()
-  @Mutation(() => ValidationUser)
-  updateValidationVerify(
-    @Args('validationUserPage') validateUserPage: UpdateValidationVerify,
-  ) {
-    return this.userService.updateValidationPage(validateUserPage);
-  }
-
-  @Public()
-  @Mutation(() => ValidationUser)
-  updateValidation(@Args('validationUser') updateValidation: UpdateValidation) {
-    return this.userService.updateValidation(updateValidation);
+  @Mutation(() => ResponseValidation)
+  updateValidation(@Args('validationUser') validateUser: UpdateValidation) {
+    return this.userService.updateValidation(validateUser);
   }
 
   @Mutation(() => User)

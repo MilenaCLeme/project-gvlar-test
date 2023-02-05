@@ -2,7 +2,6 @@ import { ForbiddenException, Injectable } from '@nestjs/common';
 import * as argon from 'argon2';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { UpdateUserInput } from './dto/update-user.input';
-import { UpdateValidationVerify } from './dto/update-validation-verify.input';
 import { UpdateValidation } from './dto/update-validation.input';
 
 @Injectable()
@@ -12,7 +11,7 @@ export class UserService {
     return await this.prisma.user.findMany();
   }
 
-  async userOne(email: string) {
+  async userOneEmail(email: string) {
     return await this.prisma.user.findUnique({
       where: {
         email,
@@ -20,38 +19,7 @@ export class UserService {
     });
   }
 
-  async updateValidationPage(updateValidationPage: UpdateValidationVerify) {
-    const user = await this.prisma.user.findUnique({
-      where: {
-        id: updateValidationPage.id,
-      },
-    });
-
-    if (!user) {
-      throw new ForbiddenException('Access Denied');
-    }
-
-    if (user.validation) {
-      throw new ForbiddenException('Access Denied');
-    }
-
-    const doRefreshTokeMatch = await argon.verify(
-      user.hashedRefreshToken,
-      updateValidationPage.refreshToken,
-    );
-
-    if (!doRefreshTokeMatch) {
-      throw new ForbiddenException('Access Denied');
-    }
-
-    return { validation: true };
-  }
-
   async updateValidation(updateValidation: UpdateValidation) {
-    if (!updateValidation.validation) {
-      throw new ForbiddenException('Access Denied');
-    }
-
     const user = await this.prisma.user.findUnique({
       where: {
         id: updateValidation.id,
@@ -84,7 +52,7 @@ export class UserService {
       },
     });
 
-    return { validation: true };
+    return { validation: true, user };
   }
 
   update(id: number, updateUserInput: UpdateUserInput) {
