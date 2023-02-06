@@ -75,7 +75,7 @@ export class AuthService {
     const accessToken = this.jwtService.sign(
       { userId, email },
       {
-        expiresIn: '1h',
+        expiresIn: '5h',
         secret: this.configService.get('ACCES_TOKEN_SECRET'),
       },
     );
@@ -112,8 +112,9 @@ export class AuthService {
     return { loggedOut: true };
   }
 
-  async getNewTokens(userId: number, header: string) {
-    console.log(header);
+  async getNewTokens(userId: number, header: any) {
+    console.log(JSON.parse(header));
+    // .rawHeaders
     const user = await this.prisma.user.findUnique({
       where: { id: userId },
     });

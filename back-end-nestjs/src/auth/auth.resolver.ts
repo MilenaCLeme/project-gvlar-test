@@ -8,6 +8,7 @@ import { LogoutResponse } from './dto/logout-response';
 import { Public } from './decorators/public.decoratior';
 import { NewTokensResponse } from './dto/newTokensResponse';
 import { CurrentUserId } from './decorators/currentUserId.decorator';
+import { CurrentToken } from './decorators/currentToken.decorator';
 
 @Resolver(() => Auth)
 export class AuthResolver {
@@ -36,7 +37,7 @@ export class AuthResolver {
   }
 
   @Mutation(() => NewTokensResponse)
-  getNewTokens(@CurrentUserId() userId: number, @Context() header: string) {
+  getNewTokens(@CurrentUserId() userId: number, @Context() header: any) {
     return this.authService.getNewTokens(userId, header);
   }
 }

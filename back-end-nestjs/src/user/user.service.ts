@@ -1,8 +1,8 @@
 import { ForbiddenException, Injectable } from '@nestjs/common';
 import * as argon from 'argon2';
 import { PrismaService } from 'src/prisma/prisma.service';
-import { UpdateUserInput } from './dto/update-user.input';
-import { UpdateValidation } from './dto/update-validation.input';
+import { UpdateUserInput } from './dto/updateUser-input';
+import { UpdateValidation } from './dto/updateValidation-input';
 
 @Injectable()
 export class UserService {
@@ -55,8 +55,26 @@ export class UserService {
     return { validation: true, user };
   }
 
-  update(id: number, updateUserInput: UpdateUserInput) {
-    return `This action updates a #${id} user`;
+  async update(id: number, updateUserInput: UpdateUserInput) {
+    const { email, name, phone, validation, role } = updateUserInput;
+
+    const hashedPassword = updateUserInput.hashedPassword
+      ? await argon.hash(updateUserInput.hashedPassword)
+      : undefined;
+
+    return this.prisma.user.update({
+      where: {
+        id,
+      },
+      data: {
+        ...(name && { name }),
+        ...(email && { email }),
+        ...(phone && { phone }),
+        ...(validation && { validation }),
+        ...(role && { role }),
+        ...(hashedPassword && { hashedPassword }),
+      },
+    });
   }
 
   remove(id: number) {

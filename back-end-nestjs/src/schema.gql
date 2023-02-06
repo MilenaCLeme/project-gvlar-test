@@ -13,7 +13,7 @@ type Mutation {
   signin(signInInput: SignInInput!): SignResponse!
   signup(signUpInput: SignUpInput!): SignResponse!
   updateUser(updateUserInput: UpdateUserInput!): User!
-  updateValidation: ValidationUser!
+  updateValidation(updateValidation: UpdateValidation!): ResponseValidation!
 }
 
 type NewTokensResponse {
@@ -24,7 +24,12 @@ type NewTokensResponse {
 type Query {
   user: [User!]!
   userId: String!
-  userOne(email: String!): User!
+  userOneEmail(email: String!): User!
+}
+
+type ResponseValidation {
+  user: User!
+  validation: Boolean!
 }
 
 input SignInInput {
@@ -56,6 +61,11 @@ input UpdateUserInput {
   validation: Boolean
 }
 
+input UpdateValidation {
+  id: Int!
+  refreshToken: String!
+}
+
 type User {
   email: String!
   hashedPassword: String!
@@ -63,9 +73,5 @@ type User {
   name: String!
   phone: String!
   role: String!
-  validation: Boolean!
-}
-
-type ValidationUser {
   validation: Boolean!
 }
