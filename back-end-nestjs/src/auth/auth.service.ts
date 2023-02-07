@@ -75,7 +75,7 @@ export class AuthService {
     const accessToken = this.jwtService.sign(
       { userId, email },
       {
-        expiresIn: '5h',
+        expiresIn: '8h',
         secret: this.configService.get('ACCES_TOKEN_SECRET'),
       },
     );
@@ -86,7 +86,7 @@ export class AuthService {
         accessToken,
       },
       {
-        expiresIn: '7d',
+        expiresIn: '1d',
         secret: this.configService.get('REFRESH_TOKEN_SECRET'),
       },
     );
@@ -113,8 +113,6 @@ export class AuthService {
   }
 
   async getNewTokens(userId: number, header: any) {
-    console.log(JSON.parse(header));
-    // .rawHeaders
     const user = await this.prisma.user.findUnique({
       where: { id: userId },
     });
@@ -124,6 +122,15 @@ export class AuthService {
     }
 
     if (!user.hashedRefreshToken) {
+      throw new ForbiddenException('Access Denied');
+    }
+
+    const doRefresenTokenMatch = await argon.verify(
+      user.hashedRefreshToken,
+      header,
+    );
+
+    if (!doRefresenTokenMatch) {
       throw new ForbiddenException('Access Denied');
     }
 

@@ -12,6 +12,7 @@ type Mutation {
   removeUser(id: Int!): User!
   signin(signInInput: SignInInput!): SignResponse!
   signup(signUpInput: SignUpInput!): SignResponse!
+  updateRole(updateRoleInput: UpdateRoleInput!): ResponseValidation!
   updateUser(updateUserInput: UpdateUserInput!): User!
   updateValidation(updateValidation: UpdateValidation!): ResponseValidation!
 }
@@ -25,6 +26,7 @@ type Query {
   user: [User!]!
   userId: String!
   userOneEmail(email: String!): User!
+  userOneId: User!
 }
 
 type ResponseValidation {
@@ -51,14 +53,17 @@ input SignUpInput {
   role: String!
 }
 
+input UpdateRoleInput {
+  role: String!
+  userId: Int!
+}
+
 input UpdateUserInput {
   email: String
   hashedPassword: String
   id: Int!
   name: String
   phone: String
-  role: String
-  validation: Boolean
 }
 
 input UpdateValidation {

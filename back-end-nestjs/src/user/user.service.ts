@@ -1,12 +1,17 @@
 import { ForbiddenException, Injectable } from '@nestjs/common';
+import { ConfigService } from '@nestjs/config';
 import * as argon from 'argon2';
 import { PrismaService } from 'src/prisma/prisma.service';
+import { UpdateRoleInput } from './dto/updateRole-input';
 import { UpdateUserInput } from './dto/updateUser-input';
 import { UpdateValidation } from './dto/updateValidation-input';
 
 @Injectable()
 export class UserService {
-  constructor(private prisma: PrismaService) {}
+  constructor(
+    private prisma: PrismaService,
+    private configService: ConfigService,
+  ) {}
   async userAll() {
     return await this.prisma.user.findMany();
   }
@@ -15,6 +20,14 @@ export class UserService {
     return await this.prisma.user.findUnique({
       where: {
         email,
+      },
+    });
+  }
+
+  async userOneId(id: number) {
+    return await this.prisma.user.findUnique({
+      where: {
+        id,
       },
     });
   }
@@ -55,14 +68,41 @@ export class UserService {
     return { validation: true, user };
   }
 
-  async update(id: number, updateUserInput: UpdateUserInput) {
-    const { email, name, phone, validation, role } = updateUserInput;
+  async updateRole(id: number, updateRoleInput: UpdateRoleInput) {
+    const userFrist = await this.prisma.user.findUnique({
+      where: {
+        id,
+      },
+    });
+
+    if (!userFrist) {
+      throw new ForbiddenException('Access Denied');
+    }
+
+    if (userFrist.email !== this.configService.get('MAIL_USER')) {
+      throw new ForbiddenException('Access Denied');
+    }
+
+    const userSecond = await this.prisma.user.update({
+      where: {
+        id: updateRoleInput.userId,
+      },
+      data: {
+        role: updateRoleInput.role,
+      },
+    });
+
+    return { validation: true, user: userSecond };
+  }
+
+  async updateUser(id: number, updateUserInput: UpdateUserInput) {
+    const { email, name, phone } = updateUserInput;
 
     const hashedPassword = updateUserInput.hashedPassword
       ? await argon.hash(updateUserInput.hashedPassword)
       : undefined;
 
-    return this.prisma.user.update({
+    return await this.prisma.user.update({
       where: {
         id,
       },
@@ -70,14 +110,16 @@ export class UserService {
         ...(name && { name }),
         ...(email && { email }),
         ...(phone && { phone }),
-        ...(validation && { validation }),
-        ...(role && { role }),
         ...(hashedPassword && { hashedPassword }),
       },
     });
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} user`;
+  async removeUser(id: number) {
+    return await this.prisma.user.delete({
+      where: {
+        id,
+      },
+    });
   }
 }

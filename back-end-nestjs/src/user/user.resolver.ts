@@ -5,6 +5,8 @@ import { UpdateUserInput } from './dto/updateUser-input';
 import { Public } from 'src/auth/decorators/public.decoratior';
 import { ResponseValidation } from './dto/response-validation';
 import { UpdateValidation } from './dto/updateValidation-input';
+import { CurrentUserId } from 'src/auth/decorators/currentUserId.decorator';
+import { UpdateRoleInput } from './dto/updateRole-input';
 
 @Resolver(() => User)
 export class UserResolver {
@@ -13,6 +15,11 @@ export class UserResolver {
   @Query(() => [User], { name: 'user' })
   userAll() {
     return this.userService.userAll();
+  }
+
+  @Query(() => User)
+  userOneId(@CurrentUserId() id: number) {
+    return this.userService.userOneId(id);
   }
 
   @Query(() => User)
@@ -30,11 +37,19 @@ export class UserResolver {
 
   @Mutation(() => User)
   updateUser(@Args('updateUserInput') updateUserInput: UpdateUserInput) {
-    return this.userService.update(updateUserInput.id, updateUserInput);
+    return this.userService.updateUser(updateUserInput.id, updateUserInput);
+  }
+
+  @Mutation(() => ResponseValidation)
+  updateRole(
+    @Args('updateRoleInput') updateRoleInput: UpdateRoleInput,
+    @CurrentUserId() id: number,
+  ) {
+    return this.userService.updateRole(id, updateRoleInput);
   }
 
   @Mutation(() => User)
   removeUser(@Args('id', { type: () => Int }) id: number) {
-    return this.userService.remove(id);
+    return this.userService.removeUser(id);
   }
 }

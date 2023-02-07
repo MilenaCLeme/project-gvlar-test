@@ -5,7 +5,6 @@ export const CurrentToken = createParamDecorator(
   (_: undefined, context: ExecutionContext) => {
     const ctx = GqlExecutionContext.create(context);
     const req = ctx.getContext().req;
-    console.log(req.authorization);
-    return req.user;
+    return req.user.refreshToken;
   },
 );

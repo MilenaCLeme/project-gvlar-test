@@ -25,14 +25,4 @@ export class CreateUserInput {
   @Length(10, 11)
   @Field()
   phone: string;
-
-  @IsNotEmpty()
-  @IsString()
-  @Field()
-  validation: boolean;
-
-  @IsNotEmpty()
-  @IsString()
-  @Field()
-  role: string;
 }
