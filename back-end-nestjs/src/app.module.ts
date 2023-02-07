@@ -9,6 +9,7 @@ import { APP_GUARD } from '@nestjs/core';
 import { AccesTokenGuard } from './auth/guards/acessToken.guard';
 import { UserModule } from './user/user.module';
 import { MailModule } from './mail/mail.module';
+import { ImmobileModule } from './immobile/immobile.module';
 
 @Module({
   imports: [
@@ -21,6 +22,7 @@ import { MailModule } from './mail/mail.module';
     AuthModule,
     UserModule,
     MailModule,
+    ImmobileModule,
   ],
   controllers: [],
   providers: [PrismaService, { provide: APP_GUARD, useClass: AccesTokenGuard }],

@@ -2,16 +2,29 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
+input CreateImmobileInput {
+  """Example field (placeholder)"""
+  exampleField: Int!
+}
+
+type Immobile {
+  """Example field (placeholder)"""
+  exampleField: Int!
+}
+
 type LogoutResponse {
   loggedOut: Boolean!
 }
 
 type Mutation {
+  createImmobile(createImmobileInput: CreateImmobileInput!): Immobile!
   getNewTokens: NewTokensResponse!
   logout(id: Int!): LogoutResponse!
+  removeImmobile(id: Int!): Immobile!
   removeUser(id: Int!): User!
   signin(signInInput: SignInInput!): SignResponse!
   signup(signUpInput: SignUpInput!): SignResponse!
+  updateImmobile(updateImmobileInput: UpdateImmobileInput!): Immobile!
   updateRole(updateRoleInput: UpdateRoleInput!): ResponseValidation!
   updateUser(updateUserInput: UpdateUserInput!): User!
   updateValidation(updateValidation: UpdateValidation!): ResponseValidation!
@@ -19,10 +32,10 @@ type Mutation {
 
 type NewTokensResponse {
   accessToken: String!
-  refreshToken: String!
 }
 
 type Query {
+  immobile(id: Int!): Immobile!
   user: [User!]!
   userId: String!
   userOneEmail(email: String!): User!
@@ -30,8 +43,8 @@ type Query {
 }
 
 type ResponseValidation {
+  success: Boolean!
   user: User!
-  validation: Boolean!
 }
 
 input SignInInput {
@@ -41,7 +54,6 @@ input SignInInput {
 
 type SignResponse {
   accessToken: String!
-  refreshToken: String!
   user: User!
 }
 
@@ -51,6 +63,12 @@ input SignUpInput {
   password: String!
   phone: String!
   role: String!
+}
+
+input UpdateImmobileInput {
+  """Example field (placeholder)"""
+  exampleField: Int
+  id: Int!
 }
 
 input UpdateRoleInput {
@@ -64,6 +82,7 @@ input UpdateUserInput {
   id: Int!
   name: String
   phone: String
+  role: String
 }
 
 input UpdateValidation {
