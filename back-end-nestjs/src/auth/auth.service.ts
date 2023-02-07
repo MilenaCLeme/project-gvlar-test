@@ -30,13 +30,10 @@ export class AuthService {
 
     await this.mailService.sendUserConfirmation(user.name, user.id, user.email);
 
-    const { accessToken, refreshToken } = await this.createTokens(
-      user.id,
-      user.email,
-    );
+    const { accessToken } = await this.createTokens(user.id, user.email);
 
-    await this.updateRefreshToken(user.id, refreshToken);
-    return { accessToken, refreshToken, user };
+    await this.updateRefreshToken(user.id, accessToken);
+    return { accessToken, user };
   }
 
   async signin(signInInput: SignInInput) {
@@ -61,36 +58,22 @@ export class AuthService {
       throw new ForbiddenException('Access Denied');
     }
 
-    const { accessToken, refreshToken } = await this.createTokens(
-      user.id,
-      user.email,
-    );
+    const { accessToken } = await this.createTokens(user.id, user.email);
 
-    await this.updateRefreshToken(user.id, refreshToken);
+    await this.updateRefreshToken(user.id, accessToken);
 
-    return { accessToken, refreshToken, user };
+    return { accessToken, user };
   }
 
   async createTokens(userId: number, email: string) {
     const accessToken = this.jwtService.sign(
       { userId, email },
       {
-        expiresIn: '8h',
+        expiresIn: '2d',
         secret: this.configService.get('ACCES_TOKEN_SECRET'),
       },
     );
-    const refreshToken = this.jwtService.sign(
-      {
-        userId,
-        email,
-        accessToken,
-      },
-      {
-        expiresIn: '1d',
-        secret: this.configService.get('REFRESH_TOKEN_SECRET'),
-      },
-    );
-    return { accessToken, refreshToken };
+    return { accessToken };
   }
 
   async updateRefreshToken(userId: number, refreshToken: string) {
@@ -134,13 +117,10 @@ export class AuthService {
       throw new ForbiddenException('Access Denied');
     }
 
-    const { accessToken, refreshToken } = await this.createTokens(
-      user.id,
-      user.email,
-    );
+    const { accessToken } = await this.createTokens(user.id, user.email);
 
-    await this.updateRefreshToken(user.id, refreshToken);
+    await this.updateRefreshToken(user.id, accessToken);
 
-    return { accessToken, refreshToken, user };
+    return { accessToken, user };
   }
 }
