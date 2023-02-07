@@ -1,5 +1,4 @@
 import { ForbiddenException, Injectable } from '@nestjs/common';
-import { ConfigService } from '@nestjs/config';
 import * as argon from 'argon2';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { UpdateRoleInput } from './dto/updateRole-input';
@@ -8,10 +7,7 @@ import { UpdateValidation } from './dto/updateValidation-input';
 
 @Injectable()
 export class UserService {
-  constructor(
-    private prisma: PrismaService,
-    private configService: ConfigService,
-  ) {}
+  constructor(private prisma: PrismaService) {}
   async userAll() {
     return await this.prisma.user.findMany();
   }
@@ -65,7 +61,7 @@ export class UserService {
       },
     });
 
-    return { validation: true, user };
+    return { success: true, user };
   }
 
   async updateRole(id: number, updateRoleInput: UpdateRoleInput) {
@@ -79,7 +75,7 @@ export class UserService {
       throw new ForbiddenException('Access Denied');
     }
 
-    if (userFrist.email !== this.configService.get('MAIL_USER')) {
+    if (userFrist.role === 'client') {
       throw new ForbiddenException('Access Denied');
     }
 
@@ -92,11 +88,11 @@ export class UserService {
       },
     });
 
-    return { validation: true, user: userSecond };
+    return { success: true, user: userSecond };
   }
 
   async updateUser(id: number, updateUserInput: UpdateUserInput) {
-    const { email, name, phone } = updateUserInput;
+    const { email, name, phone, role } = updateUserInput;
 
     const hashedPassword = updateUserInput.hashedPassword
       ? await argon.hash(updateUserInput.hashedPassword)
@@ -111,6 +107,7 @@ export class UserService {
         ...(email && { email }),
         ...(phone && { phone }),
         ...(hashedPassword && { hashedPassword }),
+        ...(role && { role }),
       },
     });
   }
