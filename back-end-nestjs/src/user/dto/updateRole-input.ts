@@ -1,9 +1,9 @@
-import { Field, InputType, Int } from '@nestjs/graphql';
+import { Field, ID, InputType } from '@nestjs/graphql';
 import { IsNotEmpty, IsString } from 'class-validator';
 
 @InputType()
 export class UpdateRoleInput {
-  @Field(() => Int)
+  @Field(() => ID)
   userId: number;
 
   @IsNotEmpty()

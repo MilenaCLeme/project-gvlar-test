@@ -3,13 +3,42 @@
 # ------------------------------------------------------
 
 input CreateImmobileInput {
-  """Example field (placeholder)"""
-  exampleField: Int!
+  about: String!
+  address: String!
+  bathroom: Int!
+  complement: String
+  describe: String!
+  district: String!
+  footage: Int!
+  iptu: String!
+  number: String!
+  postalcode: String!
+  recordId: Int!
+  state: String!
+  type: String!
+  vacancy: Int!
+  vboth: String
+  vsell: String
 }
 
 type Immobile {
-  """Example field (placeholder)"""
-  exampleField: Int!
+  about: String!
+  address: String!
+  bathroom: Int!
+  complement: String
+  describe: String!
+  district: String!
+  footage: Int!
+  id: ID!
+  iptu: String!
+  number: String!
+  postalcode: String!
+  published: Boolean!
+  state: String!
+  type: String!
+  vacancy: Int!
+  vboth: String
+  vsell: String
 }
 
 type LogoutResponse {
@@ -66,34 +95,49 @@ input SignUpInput {
 }
 
 input UpdateImmobileInput {
-  """Example field (placeholder)"""
-  exampleField: Int
-  id: Int!
+  about: String
+  address: String
+  bathroom: Int
+  complement: String
+  describe: String
+  district: String
+  footage: Int
+  id: ID!
+  iptu: String
+  number: String
+  postalcode: String
+  recordId: Int
+  state: String
+  type: String
+  vacancy: Int
+  vboth: String
+  vsell: String
 }
 
 input UpdateRoleInput {
   role: String!
-  userId: Int!
+  userId: ID!
 }
 
 input UpdateUserInput {
   email: String
   hashedPassword: String
-  id: Int!
+  id: ID!
   name: String
   phone: String
   role: String
 }
 
 input UpdateValidation {
-  id: Int!
+  id: ID!
   refreshToken: String!
 }
 
 type User {
   email: String!
   hashedPassword: String!
-  id: Int!
+  hashedRefreshToken: String
+  id: ID!
   name: String!
   phone: String!
   role: String!

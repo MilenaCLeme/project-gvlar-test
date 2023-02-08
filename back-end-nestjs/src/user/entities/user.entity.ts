@@ -1,8 +1,8 @@
-import { ObjectType, Field, Int } from '@nestjs/graphql';
+import { ObjectType, Field, ID } from '@nestjs/graphql';
 
 @ObjectType()
 export class User {
-  @Field(() => Int)
+  @Field(() => ID)
   id: number;
 
   @Field()
@@ -22,4 +22,7 @@ export class User {
 
   @Field()
   hashedPassword: string;
+
+  @Field({ nullable: true })
+  hashedRefreshToken?: string;
 }

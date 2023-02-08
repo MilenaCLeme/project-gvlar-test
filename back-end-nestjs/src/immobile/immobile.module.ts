@@ -3,6 +3,6 @@ import { ImmobileService } from './immobile.service';
 import { ImmobileResolver } from './immobile.resolver';
 
 @Module({
-  providers: [ImmobileResolver, ImmobileService]
+  providers: [ImmobileResolver, ImmobileService],
 })
 export class ImmobileModule {}
