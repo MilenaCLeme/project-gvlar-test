@@ -1,6 +1,6 @@
 import { Field, ObjectType } from '@nestjs/graphql';
 import { IsNotEmpty, IsString } from 'class-validator';
-import { User } from 'src/user/entities/user.entity';
+import { UserImmobile } from 'src/user/entities/userWithImmobile.entity';
 
 @ObjectType()
 export class SignResponse {
@@ -9,6 +9,6 @@ export class SignResponse {
   @Field()
   accessToken: string;
 
-  @Field(() => User)
-  user: User;
+  @Field(() => UserImmobile)
+  user: UserImmobile;
 }
