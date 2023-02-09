@@ -13,7 +13,6 @@ input CreateImmobileInput {
   iptu: String!
   number: String!
   postalcode: String!
-  recordId: Int!
   state: String!
   type: String!
   vacancy: Int!
@@ -46,7 +45,7 @@ type LogoutResponse {
 }
 
 type Mutation {
-  createImmobile(createImmobileInput: CreateImmobileInput!): Immobile!
+  createImmobile(createImmobileInput: CreateImmobileInput!): ResponseImmobile!
   getNewTokens: NewTokensResponse!
   logout(id: Int!): LogoutResponse!
   removeImmobile(id: Int!): Immobile!
@@ -69,6 +68,27 @@ type Query {
   userId: String!
   userOneEmail(email: String!): User!
   userOneId: User!
+}
+
+type ResponseImmobile {
+  about: String!
+  address: String!
+  bathroom: Int!
+  complement: String
+  describe: String!
+  district: String!
+  footage: Int!
+  id: ID!
+  iptu: String!
+  number: String!
+  postalcode: String!
+  published: Boolean!
+  state: String!
+  type: String!
+  user: User!
+  vacancy: Int!
+  vboth: String
+  vsell: String
 }
 
 type ResponseValidation {
@@ -106,7 +126,6 @@ input UpdateImmobileInput {
   iptu: String
   number: String
   postalcode: String
-  recordId: Int
   state: String
   type: String
   vacancy: Int

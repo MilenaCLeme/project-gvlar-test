@@ -74,9 +74,4 @@ export class CreateImmobileInput {
   @IsString()
   @Field()
   state: string;
-
-  @IsNotEmpty()
-  @IsString()
-  @Field(() => Int)
-  recordId: number;
 }
