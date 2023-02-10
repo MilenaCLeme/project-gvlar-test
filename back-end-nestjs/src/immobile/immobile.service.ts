@@ -49,11 +49,17 @@ export class ImmobileService {
   }
 
   async findManyImmobileUser(userId: number) {
-    return await this.prisma.immobile.findMany({
+    const immobile = await this.prisma.immobile.findMany({
       where: {
         recordId: userId,
       },
     });
+
+    if (!immobile) {
+      return [];
+    }
+
+    return immobile;
   }
 
   async updateImmobile(updateImmobileInput: UpdateImmobileInput) {

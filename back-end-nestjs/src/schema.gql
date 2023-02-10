@@ -28,7 +28,7 @@ type Immobile {
   describe: String!
   district: String!
   footage: Int!
-  id: ID!
+  id: Int!
   iptu: String!
   number: String!
   postalcode: String!
@@ -63,7 +63,7 @@ type NewTokensResponse {
 }
 
 type Query {
-  immobile(id: Int!): Immobile!
+  immobile(id: Int!): [Immobile!]!
   user: [User!]!
   userId: String!
   userOneEmail(email: String!): User!
@@ -78,7 +78,7 @@ type ResponseImmobile {
   describe: String!
   district: String!
   footage: Int!
-  id: ID!
+  id: Int!
   iptu: String!
   number: String!
   postalcode: String!
@@ -103,6 +103,7 @@ input SignInInput {
 
 type SignResponse {
   accessToken: String!
+  immobile: [Immobile!]
   user: User!
 }
 
@@ -122,7 +123,7 @@ input UpdateImmobileInput {
   describe: String
   district: String
   footage: Int
-  id: ID!
+  id: Int!
   iptu: String
   number: String
   postalcode: String
@@ -135,20 +136,20 @@ input UpdateImmobileInput {
 
 input UpdateRoleInput {
   role: String!
-  userId: ID!
+  userId: Int!
 }
 
 input UpdateUserInput {
   email: String
   hashedPassword: String
-  id: ID!
+  id: Int!
   name: String
   phone: String
   role: String
 }
 
 input UpdateValidation {
-  id: ID!
+  id: Int!
   refreshToken: String!
 }
 

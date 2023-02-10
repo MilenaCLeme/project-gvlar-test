@@ -1,9 +1,9 @@
-import { ObjectType, Field, ID, Int } from '@nestjs/graphql';
+import { ObjectType, Field, Int } from '@nestjs/graphql';
 import { User } from 'src/user/entities/user.entity';
 
 @ObjectType()
 export class ResponseImmobile {
-  @Field(() => ID)
+  @Field(() => Int)
   id: number;
 
   @Field()

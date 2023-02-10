@@ -75,7 +75,7 @@ export class UserService {
       throw new ForbiddenException('Access Denied');
     }
 
-    if (userFrist.role === 'client') {
+    if (userFrist.role === 'client' || userFrist.role === 'employee') {
       throw new ForbiddenException('Access Denied');
     }
 
@@ -91,7 +91,7 @@ export class UserService {
     return { success: true, user: userSecond };
   }
 
-  async updateUser(id: number, updateUserInput: UpdateUserInput) {
+  async updateUser(updateUserInput: UpdateUserInput) {
     const { email, name, phone, role } = updateUserInput;
 
     const hashedPassword = updateUserInput.hashedPassword
@@ -100,7 +100,7 @@ export class UserService {
 
     return await this.prisma.user.update({
       where: {
-        id,
+        id: updateUserInput.id,
       },
       data: {
         ...(name && { name }),
@@ -112,7 +112,17 @@ export class UserService {
     });
   }
 
-  async removeUser(id: number) {
+  async removeUser(id: number, userId: number) {
+    const user = await this.userOneId(userId);
+
+    if (!user) {
+      throw new ForbiddenException('Access Denied');
+    }
+
+    if (user.role !== 'master') {
+      throw new ForbiddenException('Access Denied');
+    }
+
     return await this.prisma.user.delete({
       where: {
         id,

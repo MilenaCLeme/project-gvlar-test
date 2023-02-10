@@ -6,6 +6,7 @@ import { SignUpInput } from './dto/signup-input';
 import * as argon from 'argon2';
 import { SignInInput } from './dto/signin-input';
 import { MailService } from 'src/mail/mail.service';
+import { ImmobileService } from 'src/immobile/immobile.service';
 
 @Injectable()
 export class AuthService {
@@ -14,6 +15,7 @@ export class AuthService {
     private jwtService: JwtService,
     private configService: ConfigService,
     private mailService: MailService,
+    private immobileService: ImmobileService,
   ) {}
 
   async signup(signUpInput: SignUpInput) {
@@ -33,7 +35,7 @@ export class AuthService {
     const { accessToken } = await this.createTokens(user.id, user.email);
 
     await this.updateRefreshToken(user.id, accessToken);
-    return { accessToken, user };
+    return { accessToken, user, immobile: [] };
   }
 
   async signin(signInInput: SignInInput) {
@@ -62,7 +64,12 @@ export class AuthService {
 
     await this.updateRefreshToken(user.id, accessToken);
 
-    return { accessToken, user };
+    const immobile =
+      user.role !== 'client'
+        ? []
+        : await this.immobileService.findManyImmobileUser(user.id);
+
+    return { accessToken, user, immobile };
   }
 
   async createTokens(userId: number, email: string) {
