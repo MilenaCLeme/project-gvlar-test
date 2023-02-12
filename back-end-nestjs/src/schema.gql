@@ -20,6 +20,11 @@ input CreateImmobileInput {
   vsell: String
 }
 
+input CreateOwnerInput {
+  """Example field (placeholder)"""
+  exampleField: Int!
+}
+
 type Immobile {
   about: String!
   address: String!
@@ -46,13 +51,16 @@ type LogoutResponse {
 
 type Mutation {
   createImmobile(createImmobileInput: CreateImmobileInput!): ResponseImmobile!
+  createOwner(createOwnerInput: CreateOwnerInput!): Owner!
   getNewTokens: NewTokensResponse!
   logout(id: Int!): LogoutResponse!
   removeImmobile(id: Int!): Immobile!
+  removeOwner(id: Int!): Owner!
   removeUser(id: Int!): User!
   signin(signInInput: SignInInput!): SignResponse!
   signup(signUpInput: SignUpInput!): SignResponse!
   updateImmobile(updateImmobileInput: UpdateImmobileInput!): Immobile!
+  updateOwner(updateOwnerInput: UpdateOwnerInput!): Owner!
   updateRole(updateRoleInput: UpdateRoleInput!): ResponseValidation!
   updateUser(updateUserInput: UpdateUserInput!): User!
   updateValidation(updateValidation: UpdateValidation!): ResponseValidation!
@@ -62,8 +70,14 @@ type NewTokensResponse {
   accessToken: String!
 }
 
+type Owner {
+  """Example field (placeholder)"""
+  exampleField: Int!
+}
+
 type Query {
   immobile(id: Int!): [Immobile!]!
+  owner(id: Int!): Owner!
   user: [User!]!
   userId: String!
   userOneEmail(email: String!): User!
@@ -132,6 +146,12 @@ input UpdateImmobileInput {
   vacancy: Int
   vboth: String
   vsell: String
+}
+
+input UpdateOwnerInput {
+  """Example field (placeholder)"""
+  exampleField: Int
+  id: Int!
 }
 
 input UpdateRoleInput {

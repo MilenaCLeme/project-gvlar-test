@@ -23,6 +23,7 @@ CREATE TABLE "immobile" (
     "iptu" TEXT NOT NULL,
     "describe" TEXT NOT NULL,
     "footage" INTEGER NOT NULL,
+    "bed" INTEGER NOT NULL,
     "bathroom" INTEGER NOT NULL,
     "vacancy" INTEGER NOT NULL,
     "address" TEXT NOT NULL,

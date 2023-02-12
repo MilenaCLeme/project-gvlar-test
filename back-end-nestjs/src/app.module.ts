@@ -10,6 +10,7 @@ import { AccesTokenGuard } from './auth/guards/acessToken.guard';
 import { UserModule } from './user/user.module';
 import { MailModule } from './mail/mail.module';
 import { ImmobileModule } from './immobile/immobile.module';
+import { OwnerModule } from './owner/owner.module';
 
 @Module({
   imports: [
@@ -23,6 +24,7 @@ import { ImmobileModule } from './immobile/immobile.module';
     UserModule,
     MailModule,
     ImmobileModule,
+    OwnerModule,
   ],
   controllers: [],
   providers: [PrismaService, { provide: APP_GUARD, useClass: AccesTokenGuard }],

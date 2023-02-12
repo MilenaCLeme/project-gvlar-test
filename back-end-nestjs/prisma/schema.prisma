@@ -34,6 +34,7 @@ model Immobile {
   iptu        String
   describe    String
   footage     Int
+  bed         Int
   bathroom    Int
   vacancy     Int
   address     String
