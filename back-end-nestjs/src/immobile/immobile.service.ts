@@ -37,6 +37,7 @@ export class ImmobileService {
         complement: createImmobileInput.complement,
         vboth: createImmobileInput.vboth,
         vsell: createImmobileInput.vsell,
+        bed: createImmobileInput.bed,
         recordId: userId,
       },
     });

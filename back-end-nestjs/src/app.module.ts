@@ -11,6 +11,7 @@ import { UserModule } from './user/user.module';
 import { MailModule } from './mail/mail.module';
 import { ImmobileModule } from './immobile/immobile.module';
 import { OwnerModule } from './owner/owner.module';
+import { PhotographModule } from './photograph/photograph.module';
 
 @Module({
   imports: [
@@ -25,6 +26,7 @@ import { OwnerModule } from './owner/owner.module';
     MailModule,
     ImmobileModule,
     OwnerModule,
+    PhotographModule,
   ],
   controllers: [],
   providers: [PrismaService, { provide: APP_GUARD, useClass: AccesTokenGuard }],

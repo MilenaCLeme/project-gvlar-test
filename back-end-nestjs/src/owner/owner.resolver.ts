@@ -9,27 +9,31 @@ export class OwnerResolver {
   constructor(private readonly ownerService: OwnerService) {}
 
   @Mutation(() => Owner)
-  createOwner(@Args('createOwnerInput') createOwnerInput: CreateOwnerInput) {
-    return this.ownerService.create(createOwnerInput);
+  async createOwner(
+    @Args('createOwnerInput') createOwnerInput: CreateOwnerInput,
+  ) {
+    return await this.ownerService.createOwner(createOwnerInput);
   }
 
   @Query(() => [Owner], { name: 'owner' })
-  findAll() {
-    return this.ownerService.findAll();
+  async findAllOwner() {
+    return await this.ownerService.findAllOwner();
   }
 
   @Query(() => Owner, { name: 'owner' })
-  findOne(@Args('id', { type: () => Int }) id: number) {
-    return this.ownerService.findOne(id);
+  async findOneOwner(@Args('id', { type: () => Int }) id: number) {
+    return await this.ownerService.findOneOwner(id);
   }
 
   @Mutation(() => Owner)
-  updateOwner(@Args('updateOwnerInput') updateOwnerInput: UpdateOwnerInput) {
-    return this.ownerService.update(updateOwnerInput.id, updateOwnerInput);
+  async updateOwner(
+    @Args('updateOwnerInput') updateOwnerInput: UpdateOwnerInput,
+  ) {
+    return await this.ownerService.updateOwner(updateOwnerInput);
   }
 
   @Mutation(() => Owner)
-  removeOwner(@Args('id', { type: () => Int }) id: number) {
-    return this.ownerService.remove(id);
+  async removeOwner(@Args('id', { type: () => Int }) id: number) {
+    return await this.ownerService.removeOwner(id);
   }
 }

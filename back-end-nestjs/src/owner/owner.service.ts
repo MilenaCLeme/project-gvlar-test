@@ -1,26 +1,51 @@
 import { Injectable } from '@nestjs/common';
+import { PrismaService } from 'src/prisma/prisma.service';
 import { CreateOwnerInput } from './dto/create-owner.input';
 import { UpdateOwnerInput } from './dto/update-owner.input';
 
 @Injectable()
 export class OwnerService {
-  create(createOwnerInput: CreateOwnerInput) {
-    return 'This action adds a new owner';
+  constructor(private prisma: PrismaService) {}
+  async createOwner(createOwnerInput: CreateOwnerInput) {
+    return await this.prisma.owner.create({
+      data: {
+        name: createOwnerInput.name,
+        email: createOwnerInput.email,
+        phone: createOwnerInput.phone,
+      },
+    });
   }
 
-  findAll() {
-    return `This action returns all owner`;
+  async findAllOwner() {
+    return await this.prisma.owner.findMany();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} owner`;
+  async findOneOwner(idOwner: number) {
+    return await this.prisma.owner.findUnique({
+      where: {
+        id: idOwner,
+      },
+    });
   }
 
-  update(id: number, updateOwnerInput: UpdateOwnerInput) {
-    return `This action updates a #${id} owner`;
+  async updateOwner(updateOwnerInput: UpdateOwnerInput) {
+    return await this.prisma.owner.update({
+      where: {
+        id: updateOwnerInput.id,
+      },
+      data: {
+        name: updateOwnerInput.name,
+        email: updateOwnerInput.email,
+        phone: updateOwnerInput.phone,
+      },
+    });
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} owner`;
+  async removeOwner(idOwner: number) {
+    return await this.prisma.owner.delete({
+      where: {
+        id: idOwner,
+      },
+    });
   }
 }

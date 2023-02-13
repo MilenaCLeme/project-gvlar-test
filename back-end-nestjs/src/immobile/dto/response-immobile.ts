@@ -36,6 +36,9 @@ export class ResponseImmobile {
   @Field(() => Int)
   vacancy: number;
 
+  @Field(() => Int)
+  bed: number;
+
   @Field()
   address: string;
 

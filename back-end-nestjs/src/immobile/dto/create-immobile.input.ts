@@ -39,6 +39,11 @@ export class CreateImmobileInput {
   @IsNotEmpty()
   @IsNumber()
   @Field(() => Int)
+  bed: number;
+
+  @IsNotEmpty()
+  @IsNumber()
+  @Field(() => Int)
   bathroom: number;
 
   @IsNotEmpty()

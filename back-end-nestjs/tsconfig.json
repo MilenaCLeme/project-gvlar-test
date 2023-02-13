@@ -17,6 +17,7 @@
     "strictBindCallApply": false,
     "forceConsistentCasingInFileNames": false,
     "noFallthroughCasesInSwitch": false,
+    "moduleResolution": "node",
   },
   "include": ["src"],
   "exclude": [
@@ -24,5 +25,5 @@
     "build",
     "dist",
     ".docker"
-  ]
+  ],
 }

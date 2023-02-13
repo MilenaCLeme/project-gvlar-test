@@ -13,46 +13,46 @@ export class UserResolver {
   constructor(private readonly userService: UserService) {}
 
   @Query(() => [User], { name: 'user' })
-  userAll() {
-    return this.userService.userAll();
+  async userAll() {
+    return await this.userService.userAll();
   }
 
   @Query(() => User)
-  userOneId(@CurrentUserId() id: number) {
-    return this.userService.userOneId(id);
+  async userOneId(@CurrentUserId() id: number) {
+    return await this.userService.userOneId(id);
   }
 
   @Query(() => User)
-  userOneEmail(@Args('email') email: string) {
-    return this.userService.userOneEmail(email);
+  async userOneEmail(@Args('email') email: string) {
+    return await this.userService.userOneEmail(email);
   }
 
   @Public()
   @Mutation(() => ResponseValidation)
-  updateValidation(
+  async updateValidation(
     @Args('updateValidation') updateValidation: UpdateValidation,
   ) {
-    return this.userService.updateValidation(updateValidation);
+    return await this.userService.updateValidation(updateValidation);
   }
 
   @Mutation(() => User)
-  updateUser(@Args('updateUserInput') updateUserInput: UpdateUserInput) {
-    return this.userService.updateUser(updateUserInput);
+  async updateUser(@Args('updateUserInput') updateUserInput: UpdateUserInput) {
+    return await this.userService.updateUser(updateUserInput);
   }
 
   @Mutation(() => ResponseValidation)
-  updateRole(
+  async updateRole(
     @Args('updateRoleInput') updateRoleInput: UpdateRoleInput,
     @CurrentUserId() id: number,
   ) {
-    return this.userService.updateRole(id, updateRoleInput);
+    return await this.userService.updateRole(id, updateRoleInput);
   }
 
   @Mutation(() => User)
-  removeUser(
+  async removeUser(
     @Args('id', { type: () => Int }) id: number,
     @CurrentUserId() userId: number,
   ) {
-    return this.userService.removeUser(id, userId);
+    return await this.userService.removeUser(id, userId);
   }
 }
