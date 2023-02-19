@@ -54,7 +54,6 @@ type LogoutResponse {
 type Mutation {
   createImmobile(createImmobileInput: CreateImmobileInput!): ResponseImmobile!
   createOwner(createOwnerInput: CreateOwnerInput!): Owner!
-  createPhotograph: Photograph!
   getNewTokens: NewTokensResponse!
   logout(id: Int!): LogoutResponse!
   removeImmobile(id: Int!): Immobile!
